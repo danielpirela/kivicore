@@ -12,12 +12,49 @@ datasource db {
 
 model Paciente {
   id Int @id @default(autoincrement())
-  dni Int
-  phone Int
-  email String
+  dni Int @unique
+  phone Int @unique
+  email String @unique
   password String
   name String
   gender String
   status String
-  history String
+  history History[]
+  appointment Appointment[]
+}
+
+model History {
+  id Int  @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content String
+  pacienteId Int
+  paciente Paciente @relation(fields: [pacienteId], references: [id])
+}
+
+
+model Medico {
+  id Int  @id @default(autoincrement())
+  name String
+  dni Int @unique
+  email String @unique
+  password String
+  specialty String
+  shiftStart DateTime
+  shiftEnd DateTime
+  numAppt Int
+  numFreeAppt Int
+  appointment Appointment[]
+}
+
+model Appointment {
+  id Int @id @default(autoincrement())
+  day DateTime
+  time DateTime
+  type String
+  duration Int
+  pacienteId Int
+  medicoId Int
+  paciente Paciente @relation(fields: [pacienteId], references: [id])
+  medico Medico @relation(fields: [medicoId], references: [id])
 }
