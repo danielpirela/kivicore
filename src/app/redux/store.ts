@@ -1,5 +1,8 @@
 'use client'
 import authReducer from './features/authSlice'
+import userReducer from './features/userSlice'
+import pacienteReducer from './features/pacienteSlice'
+import medicoReducer from './features/medicoSlice'
 import { configureStore} from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { combineReducers } from '@reduxjs/toolkit'
@@ -12,7 +15,10 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-    authReducer
+    auth: authReducer,
+    role: userReducer,
+    pacienteId: pacienteReducer,
+    medicoId: medicoReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig,rootReducer)

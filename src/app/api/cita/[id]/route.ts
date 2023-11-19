@@ -37,9 +37,11 @@ export async function PUT(req: Request, {params} : Params){
             time,
             type,
             duration,
+            status,
             pacienteId,
             medicoId
         } = await req.json()
+
 
         const cita = await prisma.appointment.update({
             where: {
@@ -50,6 +52,7 @@ export async function PUT(req: Request, {params} : Params){
                 time,
                 type,
                 duration,
+                status,
                 pacienteId,
                 medicoId
             }
@@ -63,7 +66,7 @@ export async function PUT(req: Request, {params} : Params){
         if(err instanceof Error) {
             return NextResponse.json(
                 {
-                    message: 'Ocurrio un error', status: 500
+                    message: err.message, status: 500
                 }
             )
         }

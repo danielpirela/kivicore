@@ -11,7 +11,8 @@ export async function GET(req: Request, {params}: Params) {
         const paciente = await prisma.paciente.findFirst({
             where: {id: Number(params.id)},
             include: {
-                history: true
+                history: true,
+                appointment: true
             }
         })
 

@@ -41,9 +41,9 @@ function Register () {
 
     return (
         <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full" >
-            <div className="w-auto p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600 lg:max-w-xl">
+            <div className="w-auto p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600 lg:max-w-xl m-4">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
-                    Sign UP
+                    Registrar
                 </h1>
                 <form className="mt-6" onSubmit={handleSubmit}>
                     <div className="mb-2">
@@ -112,18 +112,24 @@ function Register () {
                         />
                     </div>
                     <div className="mb-2 text-black">
-                        <input
-                            value='Hombre'
-                            name='genero'
-                            type="radio"
-                            className="block w-full px-4 py-2 mt-2 text-black bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300"
-                        />
-                        <input
-                            value='Mujer'
-                            name='genero'
-                            type="radio"
-                            className="block w-full px-4 py-2  text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300"
-                        />
+                        <div className='flex justify-between items-center'>
+                            <label htmlFor="genero">Hombre</label>
+                            <input
+                                value='Hombre'
+                                name='genero'
+                                type="radio"
+                                className="block w-full px-4 py-2 mt-2 text-black bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300"
+                            />
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <label htmlFor="genero">Mujer</label>
+                            <input
+                                value='Mujer'
+                                name='genero'
+                                type="radio"
+                                className="block w-full px-4 py-2  text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300"
+                            />
+                        </div>
                     </div>
 
                     <div className="mb-2">
@@ -148,12 +154,12 @@ function Register () {
 
                 <p className="mt-8 text-xs font-light text-center text-gray-700">
                     {' '}
-                    Already have an account?{' '}
+                    Ya tienes una cuenta?{' '}
                     <a
-                        href="#"
+                        href="/login"
                         className="font-medium text-indigo-600 hover:underline"
                     >
-                        Sign in
+                        Iniciar sesion
                     </a>
                 </p>
             </div>

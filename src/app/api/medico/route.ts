@@ -15,13 +15,14 @@ export async function POST (req: Request) {
             numFreeAppt
         } = await req.json()
 
+        console.log(name,dni,email,password,specialty,shiftStart,shiftEnd,numAppt,numFreeAppt)
+
         if(!name || !specialty || !shiftStart || !shiftEnd  || !numAppt || !numFreeAppt || !dni || !email || !password){
-            return NextResponse.json({message: 'no se enviaron datos'})
+            return NextResponse.json({error: 'no se enviaron datos'})
         }
 
-        console.log(shiftStart,shiftEnd)
-
         const newPassword = await hashPassword(password)
+
         const medico = await prisma.medico.create({
             data: {
                 name,

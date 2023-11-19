@@ -1,14 +1,12 @@
+'use client'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ProviderGate, Providers } from './redux/provider'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-    title: 'Kivi Core',
-    description: 'App Kivi Core',
-}
 
 export default function RootLayout({
     children,
@@ -17,10 +15,15 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <head>
+                <title>Kevi core</title>
+            </head>
             <body className={inter.className}>
                 <Providers>
                     <ProviderGate>
-                        {children}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            {children}
+                        </LocalizationProvider>
                     </ProviderGate>
                 </Providers>
             </body>

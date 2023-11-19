@@ -1,12 +1,16 @@
 'use client'
 import axios from 'axios'
 import { redirect } from 'next/navigation'
-import { useAppSelector } from '../redux/hooks'
-import { useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector} from '../redux/hooks'
+import { setAuth } from '../redux/features/authSlice'
+import { setPacienteId } from '../redux/features/pacienteSlice'
+import { useState } from 'react'
 
 function Login () {
-    const [loggedIn, setLoggedIn] = useState(false)
-    const auth = useAppSelector(state => state.authReducer.islogged)
+    const auth = useAppSelector(state => state.auth.islogged)
+    const [isError, setError] = useState(false)
+    const dispatch = useAppDispatch()
+
     console.log(auth)
 
     const handleSubmit = async (e:any) => {
@@ -18,23 +22,21 @@ function Login () {
 
         const res = await axios.post('/api/login', {
             email: email,
-            password: password
+            password: password,
+            role: 'paciente'
         })
 
-        console.log(res)
-
-        if (res.data.message !== 'ok') {
-            setLoggedIn(false)
+        if (res.data.err || res.data.error) {
+            setError(true)
+            return dispatch(setAuth(false))
         }
-        setLoggedIn(true)
+
+        setError(false)
+        dispatch(setAuth(true))
+        dispatch(setPacienteId(res.data.id))
     }
 
-
-    useEffect(()=>{
-        if (loggedIn) {
-            redirect('/')
-        }
-    },[loggedIn])
+    if (auth) redirect('/paciente/admin')
 
     return (
         <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full" >
@@ -68,6 +70,11 @@ function Login () {
                             type="password"
                             className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
+                        {
+                            isError && (
+                                <p className='text-red-500 text-center'>Clave y correo no coinciden </p>
+                            )
+                        }
                     </div>
                     <div className="mt-6">
                         <input type="submit" value='Log In' className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"/>

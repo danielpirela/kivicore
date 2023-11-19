@@ -1,4 +1,3 @@
-'use client'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -6,16 +5,16 @@ const initialState = {
 }
 
 export const authSlice = createSlice({
-    name: 'login',
+    name: 'auth',
     initialState: initialState,
     reducers: {
         setAuth: (state,actions) => {
-            state.islogged = actions.payload.islogged
+            state.islogged = actions.payload
+            console.log(actions.payload)
+
         }
     }
 })
 
-
 export const {setAuth} = authSlice.actions
-
 export default authSlice.reducer

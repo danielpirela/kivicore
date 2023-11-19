@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/utils/prisma'
 import { verifyTime } from '@/utils/verifyAppt'
-
+import { transporter } from '@/utils/email'
+import { randomUUID } from 'crypto'
+const {EMAIL} = process.env
 
 export async function POST (req: Request) {
     try {
@@ -10,8 +12,10 @@ export async function POST (req: Request) {
             time,
             type,
             duration,
+            status,
             pacienteId,
-            medicoId
+            medicoId,
+            email
         } = await req.json()
 
         const horaOcupada = await verifyTime(day,medicoId,duration)
@@ -24,6 +28,7 @@ export async function POST (req: Request) {
                 time,
                 type,
                 duration,
+                status,
                 pacienteId,
                 medicoId
             }
@@ -57,9 +62,19 @@ export async function POST (req: Request) {
 
         if (!cita || !medico || !paciente) return NextResponse.json({error: 'Invalid data', status: 404})
 
+        const info = await transporter.sendMail({
+            from: EMAIL,
+            to: email,
+            subject: 'Codigo',
+            text: 'Aqui tienes tu codigo para tu cita',
+            html: `<b>${randomUUID()}</b>`, // html body
+        })
+        console.log(info)
+
+
         return NextResponse.json({cita})
     }
-    catch (err) {
+    catch (err) {8
         if (err instanceof Error) {
             return NextResponse.json({error: err.message, status: 500})
         }

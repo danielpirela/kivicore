@@ -1,3 +1,4 @@
+import { hashPassword } from '@/utils/hashPassword'
 import { prisma } from '@/utils/prisma'
 import { NextResponse } from 'next/server'
 
@@ -46,6 +47,7 @@ export async function PUT(req: Request, {params} : Params){
             return NextResponse.json({message: 'no se enviaron datos'})
         }
 
+        const newPassword = await hashPassword(password)
         const medicoPut = await prisma.medico.update({
             where: {
                 id: Number(params.id)
@@ -54,7 +56,7 @@ export async function PUT(req: Request, {params} : Params){
                 name,
                 dni,
                 email,
-                password,
+                password : newPassword,
                 specialty,
                 shiftStart,
                 shiftEnd,

@@ -53,6 +53,7 @@ model Appointment {
   time DateTime
   type String
   duration Int
+  status String
   pacienteId Int
   medicoId Int
   paciente Paciente @relation(fields: [pacienteId], references: [id])

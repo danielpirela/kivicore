@@ -7,7 +7,8 @@ export async function GET(){
     try{
         const pacientes = await prisma.paciente.findMany({
             include: {
-                history: true
+                history: true,
+                appointment: true
             }
         })
 

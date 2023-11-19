@@ -41,6 +41,7 @@ CREATE TABLE "Appointment" (
     "time" DATETIME NOT NULL,
     "type" TEXT NOT NULL,
     "duration" INTEGER NOT NULL,
+    "status" TEXT NOT NULL,
     "pacienteId" INTEGER NOT NULL,
     "medicoId" INTEGER NOT NULL,
     CONSTRAINT "Appointment_pacienteId_fkey" FOREIGN KEY ("pacienteId") REFERENCES "Paciente" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
