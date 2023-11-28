@@ -1,33 +1,15 @@
 import ApptList from './ApptList'
+import { Cita, Paciente } from '@/types'
 
 interface Props {
     paciente: Paciente
     citas: Cita[]
 }
 
-interface Cita {
-    id : string
-    day: string
-    duration: number
-    medicoId: number
-    pacienteId: number
-    time: Date
-    type: string
-    status: string
-}
-
-interface Paciente {
-id : string
-dni: string
-phone: string
-name: string,
-status: string
-appointment: Cita[]
-}
 
 const PacienteList = ({paciente}:Props) => {
     return (
-        <div className='text-black  w-aut p-2'>
+        <div className='text-black  w-auto p-2'>
             <h1 className='font-semibold text-2xl ml-2 text-indigo-600'>Paciente</h1>
             {
                 paciente && (

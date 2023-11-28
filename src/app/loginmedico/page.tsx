@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { setAuth } from '../redux/features/authSlice'
 import { setMedicoId } from '../redux/features/medicoSlice'
 import { useState } from 'react'
+import Link from 'next/link'
 
 function Login () {
     const auth = useAppSelector(state => state.auth.islogged)
@@ -13,11 +14,12 @@ function Login () {
     const handleSubmit = async (e:any) => {
         e.preventDefault()
         const {elements} = e.currentTarget
-        const email = elements.namedItem('email').value
+
+        const username = elements.namedItem('username').value
         const password = elements.namedItem('password').value
 
         const res = await axios.post('/api/login', {
-            email: email,
+            username: username,
             password: password,
             role: 'medico'
         })
@@ -37,9 +39,9 @@ function Login () {
 
     return (
         <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full" >
-            <div className="w-auto p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600 lg:max-w-xl">
+            <div className="w-auto p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600 lg:max-w-xl animate-fade-left animate-delay-150">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
-                    Sign UP
+                    Iniciar sesion
                 </h1>
                 <form className="mt-6" onSubmit={handleSubmit}>
                     <div className="mb-2">
@@ -47,11 +49,11 @@ function Login () {
                             htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
                         >
-                            Email
+                            Usuario
                         </label>
                         <input
-                            name='email'
-                            type="email"
+                            name='username'
+                            type="text"
                             className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
@@ -69,7 +71,7 @@ function Login () {
                         />
                         {
                             isError && (
-                                <p className='text-red-500 text-center'>Clave y correo no coinciden </p>
+                                <p className='text-red-500 text-center'>Clave y usuario no coinciden </p>
                             )
                         }
                     </div>
@@ -77,16 +79,25 @@ function Login () {
                         <input type="submit" value='Log In' className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"/>
                     </div>
                 </form>
-
+                <p className="mt-8 text-xs font-light text-center text-gray-700">
+                    {' '}
+                    Olvidaste tu clave?{' '}
+                    <Link
+                        href="/clave/medico"
+                        className="font-medium text-indigo-600 hover:underline"
+                    >
+                        Cambiar
+                    </Link>
+                </p>
                 <p className="mt-8 text-xs font-light text-center text-gray-700">
                     {' '}
                     Aun no tienes una cuenta?{' '}
-                    <a
+                    <Link
                         href="/registermedico"
                         className="font-medium text-indigo-600 hover:underline"
                     >
                         Registrar
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

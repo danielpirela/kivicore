@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 interface Props {
     pacientes: Paciente[]
+    cita: Cita
 }
 
 interface Cita {
@@ -25,33 +26,37 @@ status: string
 appointment: Cita[]
 }
 
-export function PacienteDatos({pacientes}:Props) {
-    const [isLoading, setIsLoading] = useState(true)
+export function PacienteDatos({pacientes, cita}:Props) {
 
-    useEffect(() => {
-        if(pacientes.length > 0) {
-            setIsLoading(false)
+
+
+
+    useEffect(() =>{
+        const a = () => {
+            pacientes?.map((paciente : Paciente) => {
+                console.log(paciente.id,cita.id)
+                if (paciente.id === cita.id) {
+                    console.log(paciente.id,cita.id, 'a')
+                }
+            })
         }
-    },[pacientes])
+        a()
+    },[pacientes, cita])
+
     return (
         <>
             {
-                <li>
-                    {
-                        isLoading && (
-                            <p>Cargando...</p>
+                pacientes && (
+                    pacientes.map(paciente =>{
+                        return (
+                            <li className='flex flex-col items-center md:flex-row w-auto justify-start sm:flex-row' key={paciente.id}>
+                                <p className='text-black text-center'>{paciente.dni}</p>
+                                <p className='text-black text-center'>{paciente.name}</p>
+                                <p className='text-black text-center'>{paciente.status}</p>
+                            </li>
                         )
-                    }
-                    {
-                        !isLoading && pacientes && (
-                            pacientes.map(paciente =>{
-                                return (
-                                    <p key={paciente.id}>{`${paciente.dni} ${paciente.name} ${paciente.status}`}</p>
-                                )
-                            })
-                        )
-                    }
-                </li>
+                    })
+                )
             }
         </>
     )

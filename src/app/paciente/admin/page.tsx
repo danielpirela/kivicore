@@ -1,7 +1,7 @@
 'use client'
 import { setPacienteEmail } from '@/app/redux/features/pacienteSlice'
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks'
-import {NavMedico} from '@/components/NavMedico'
+import { NavPaciente } from '@/components/NavPaciente'
 import PacienteList from '@/components/PacienteList'
 import { findPacienteById } from '@/utils/findPaciente'
 import { useEffect, useState } from 'react'
@@ -26,7 +26,7 @@ const page = () => {
 
     return (
         <>
-            <NavMedico/>
+            <NavPaciente/>
             <div className='bg-slate-100 min-h-screen min-w-full gap-2'>
                 <PacienteList paciente={paciente} />
             </div>

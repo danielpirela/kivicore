@@ -1,37 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Prueba } from './Prueba'
 import { editAppointment, editHistory } from '@/utils/fetchData'
+import { formateDate } from '@/utils/formatTime'
+import { Cita, Paciente } from '@/types'
 
 interface Props {
     cita: Cita
     pacientes: Paciente[]
-}
-
-interface Cita {
-    id : string
-    day: string
-    duration: number
-    medicoId: number
-    pacienteId: number
-    time: Date
-    type: string
-    status: string
-}
-interface Paciente {
-    id : string
-    dni: string
-    phone: string
-    name: string
-    status: string
-    appointment: Cita[]
-    history :History[]
-    }
-interface History {
-    id: number
-    createdAt: string
-    updatedAt: string
-    content: string
-    pacienteId: number
 }
 
 export const EditFormCita = ({cita, pacientes}:Props) => {
@@ -51,12 +26,18 @@ export const EditFormCita = ({cita, pacientes}:Props) => {
         }
     },[])
 
-    const handleSubmit = async (e) =>{
+    const handleSubmit = async (e: any) =>{
         e.preventDefault()
+
+        const date : any = Date.now()
+
+        const dateNow = formateDate(date)
+        console.log(date)
+
         const {elements} = e.currentTarget
-        const historyOld = elements.namedItem('historyOld').value
         const newhistory = elements.namedItem('newhistory').value
-        const finalHistory = historyOld + '\n' + newhistory
+        const finalHistory = + '\n' + ' - ' + dateNow + ': '+ newhistory + ' '
+
         console.log(finalHistory)
 
         await editAppointment(cita)
@@ -75,11 +56,12 @@ export const EditFormCita = ({cita, pacientes}:Props) => {
                 <p className='text-xl text-slate-400'>{paciente.dni}</p>
 
             </header>
-            <form className='flex min-h-full min- w-full flex-col justify-center items-center'  onSubmit={handleSubmit}>
+            <form className='flex min-h-full min- w-full flex-col justify-center items-center p-2'  onSubmit={handleSubmit}>
                 <div className='flex justify-between space-x-2 mt-2'>
                     <Prueba historia={history}/>
                     <textarea name="newhistory" rows={6} cols={20} className='ring-2 ring-slate-700 rounded-lg
                     hover:ring-indigo-500
+                    flex-1
                     '>
                     </textarea>
                 </div>

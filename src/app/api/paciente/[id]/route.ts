@@ -1,5 +1,6 @@
 import { hashPassword } from '@/utils/hashPassword'
 import {prisma} from '@/utils/prisma'
+import { error } from 'console'
 import { NextResponse } from 'next/server'
 
 interface Params {
@@ -29,12 +30,14 @@ export async function GET(req: Request, {params}: Params) {
     }
 }
 
-export async function PUT(req: Request, {params} : Params){
+export async function PUT (req: Request, {params} : Params) {
     try {
-        const {dni,phone,email,password,name,gender,status,history} = await req.json()
+        const {username,dni,phone,email,password,name,gender,status,history} = await req.json()
+        console.log(params.id, username, dni, phone, email, password)
+
         const newPassword = await hashPassword(password)
 
-        if(!dni && !phone && !email && !password && !name && !gender && !status && !history){
+        if(!username ||!dni && !phone && !email && !password && !name && !gender && !status && !history){
             return NextResponse.json({message: 'no se enviaron datos'})
         }
 
@@ -43,6 +46,7 @@ export async function PUT(req: Request, {params} : Params){
                 id: Number(params.id)
             },
             data:{
+                username,
                 dni,
                 phone,
                 email,
@@ -54,7 +58,7 @@ export async function PUT(req: Request, {params} : Params){
             }
         })
 
-        if (!pacientePut) return NextResponse.json({message: 'No se puedo actualizar el paciente'})
+        if (!pacientePut) return NextResponse.json({error: 'No se puedo actualizar el paciente'})
 
         return NextResponse.json(pacientePut)
 
@@ -62,7 +66,7 @@ export async function PUT(req: Request, {params} : Params){
         if(err instanceof Error) {
             return NextResponse.json(
                 {
-                    message: 'Ocurrio un error', status: 500
+                    message: err.message, status: 500
                 }
             )
         }

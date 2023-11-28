@@ -43,7 +43,7 @@ export const CreateCita = () => {
     }
 
     return (
-        <div className='flex flex-col justify-center items-center bg-slate-100 p-4 rounded-lg ring-2 ring-indigo-700 shadow-xl'>
+        <div className='flex flex-col justify-center items-center bg-white p-4 rounded-lg ring-2 ring-indigo-700 shadow-xl z-50  animate-fade-left delay-150'>
             <DateTimePicker label="Seleccione la fecha"
                 value={date}
                 onChange={(newValue) =>  setDate(newValue)}

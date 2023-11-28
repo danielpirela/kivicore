@@ -1,5 +1,4 @@
 'use client'
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ProviderGate, Providers } from './redux/provider'
 import { LocalizationProvider } from '@mui/x-date-pickers'

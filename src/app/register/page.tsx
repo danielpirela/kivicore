@@ -12,6 +12,7 @@ function Register () {
         const {elements} = e.currentTarget
 
         const name = elements.namedItem('nombre').value
+        const username = elements.namedItem('username').value
         const phone = elements.namedItem('telefono').value
         const email = elements.namedItem('email').value
         const password = elements.namedItem('password').value
@@ -22,6 +23,7 @@ function Register () {
         console.log(name,phone, email, password, dni, gender, status)
 
         const res = await axios.post('/api/paciente', {
+            username: username,
             dni: Number(dni),
             phone: Number(phone),
             email: email,
@@ -40,12 +42,25 @@ function Register () {
     },[isCreated])
 
     return (
-        <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full" >
-            <div className="w-auto p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600 lg:max-w-xl m-4">
+        <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full animate-fade-left animate-delay-150 p-4 " >
+            <div className="w-auto p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600 lg:max-w-xl ">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
                     Registrar
                 </h1>
                 <form className="mt-6" onSubmit={handleSubmit}>
+                    <div className="mb-2">
+                        <label
+                            htmlFor="username"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Username
+                        </label>
+                        <input
+                            name='username'
+                            type="text"
+                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                    </div>
                     <div className="mb-2">
                         <label
                             htmlFor="nombre"
@@ -132,20 +147,25 @@ function Register () {
                         </div>
                     </div>
 
-                    <div className="mb-2">
-                        <label
-                            htmlFor="estado"
-                            className="text-sm font-semibold text-gray-800 flex justify-center items-center"
-                        >
-                            Asegurado
-
+                    <div className="mb-2 text-black">
+                        <div className='flex justify-between items-center'>
+                            <label htmlFor="estado">Asegurado</label>
                             <input
-                                name='estado'
                                 value='Asegurado'
-                                type="checkbox"
-                                className="w-full  text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300"
+                                name='estado'
+                                type="radio"
+                                className="block w-full px-6 py-2 mt-2 text-black bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300"
                             />
-                        </label>
+                        </div>
+                        <div className='flex justify-center items-center'>
+                            <label htmlFor="genero" className='flex-2'>No asegurado</label>
+                            <input
+                                value='No asegurado'
+                                name='estado'
+                                type="radio"
+                                className="block w-full py-2  text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 flex-1"
+                            />
+                        </div>
                     </div>
                     <div className="mt-6">
                         <input type="submit" value='Registrar' className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"/>

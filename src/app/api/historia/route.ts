@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import {prisma} from '@/utils/prisma'
+
 export async function GET () {
     return NextResponse.json({message: 'hola'})
 }

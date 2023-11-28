@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { ApptListMedico } from './ApptListMedico'
 
 interface Props {

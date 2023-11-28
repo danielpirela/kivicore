@@ -21,3 +21,23 @@ export async function findPacienteById(id:string){
     const res = await axios.get(`/api/paciente/${id}`)
     return res
 }
+
+
+
+export async function findManyPacientes(){
+    const res = await axios.get('/api/paciente')
+    return res
+}
+
+
+export async function findManyMedicos(){
+    const res = await axios.get('/api/medico')
+    return res
+}
+
+
+export async function findManyCitas(){
+    const res = await axios.get('/api/cita')
+    console.log(res)
+    return res
+}

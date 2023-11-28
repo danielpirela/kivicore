@@ -13,6 +13,7 @@ function RegisterMedico () {
         e.preventDefault()
         const {elements} = e.currentTarget
 
+        const username = elements.namedItem('username').value
         const name = elements.namedItem('nombre').value
         const dni = elements.namedItem('dni').value
         const email = elements.namedItem('email').value
@@ -21,16 +22,17 @@ function RegisterMedico () {
         const numAppt = elements.namedItem('numAppt').value
         const numFreeAppt = elements.namedItem('numFreeAppt').value
 
-        if (!shiftStart && !shiftEnd && !name && !numAppt && !numFreeAppt && !email && !password && !dni && !specialty) {
+        if (!username || !shiftStart || !shiftEnd || !name || !numAppt || !numFreeAppt || !email || !password || !dni || !specialty) {
             return  setIsError(true)
         }
 
         const newShiftStart = await shiftStart.toISOString()
         const newShiftEnd = await shiftEnd.toISOString()
 
-        const res = await createMedico(name,dni,email,password,specialty,newShiftStart,newShiftEnd,numAppt,numFreeAppt)
+        const res = await createMedico(username, name,dni,email,password,specialty,newShiftStart,newShiftEnd,numAppt,numFreeAppt)
 
         if (res.data.error) {
+            console.log(res)
             return setIsError(true)
         }
         setIsError(false)
@@ -47,6 +49,19 @@ function RegisterMedico () {
 
                     <div className='flex flex-now  min-w-full'>
                         <div className='p-5'>
+                            <div className="mb-2">
+                                <label
+                                    htmlFor="username"
+                                    className="block text-sm font-semibold text-gray-800"
+                                >
+                                    Usuario
+                                </label>
+                                <input
+                                    name='username'
+                                    type="text"
+                                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                />
+                            </div>
                             <div className="mb-2">
                                 <label
                                     htmlFor="nombre"

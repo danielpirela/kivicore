@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "Paciente" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "username" TEXT NOT NULL,
     "dni" INTEGER NOT NULL,
     "phone" INTEGER NOT NULL,
     "email" TEXT NOT NULL,
@@ -24,6 +25,7 @@ CREATE TABLE "History" (
 CREATE TABLE "Medico" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "dni" INTEGER NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -48,6 +50,16 @@ CREATE TABLE "Appointment" (
     CONSTRAINT "Appointment_medicoId_fkey" FOREIGN KEY ("medicoId") REFERENCES "Medico" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "AdminUser" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "username" TEXT NOT NULL DEFAULT 'admin',
+    "password" TEXT NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Paciente_username_key" ON "Paciente"("username");
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Paciente_dni_key" ON "Paciente"("dni");
 
@@ -56,6 +68,9 @@ CREATE UNIQUE INDEX "Paciente_phone_key" ON "Paciente"("phone");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Paciente_email_key" ON "Paciente"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Medico_username_key" ON "Medico"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Medico_dni_key" ON "Medico"("dni");

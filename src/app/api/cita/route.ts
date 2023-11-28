@@ -3,6 +3,7 @@ import { prisma } from '@/utils/prisma'
 import { verifyTime } from '@/utils/verifyAppt'
 import { transporter } from '@/utils/email'
 import { randomUUID } from 'crypto'
+
 const {EMAIL} = process.env
 
 export async function POST (req: Request) {
@@ -93,7 +94,7 @@ export async function GET(){
 
         if(!citas) return NextResponse.json({message: 'no se encontraron citas'})
 
-        return NextResponse.json({citas})
+        return NextResponse.json(citas)
 
     }catch(err){
         if(err instanceof Error){

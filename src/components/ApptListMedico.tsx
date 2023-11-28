@@ -1,13 +1,9 @@
-import { redirect } from 'next/navigation'
 import { useState } from 'react'
-import { EditModal } from './EditModal'
 import { deleteCita } from '@/utils/fetchData'
-import { ComponentModal } from './ComponentModal'
-import { CreateCita } from './CreateCita'
-import { PacienteDatos } from './PacienteDatos'
 import { ModalEditMedicoCita } from './ModalEditMedicoCita'
 import { EditFormCita } from './EditFormCita'
 import { IconCheck, IconClose, IconTrash } from './Icons'
+import { formateDate } from '@/utils/formatTime'
 
 interface Props {
     pacientes: Paciente[]
@@ -35,7 +31,7 @@ interface Cita {
 }
 
 
-export const ApptListMedico = ({citas, pacientes}:Props) => {
+export const    ApptListMedico = ({citas, pacientes}:Props) => {
     const [isEditing, setIsEditing] = useState(false)
     const [citaIndividual,setCitaIndividual] = useState({})
     const [deleteView, setDeleteView] = useState(false)
@@ -93,20 +89,32 @@ export const ApptListMedico = ({citas, pacientes}:Props) => {
                 citas && (
                     citas.map((cita , index)=> {
                         return (
-                            <>
-                                <ul className='shadow-md flex space-x-2 p-2 rounded-md m-2 ring-2 ring-indigo-600 justify-start items-center w-auto' key={cita.id}
+                            <div key={cita.id} className='gap-4 flex m-2 max-[639px]:justify-center max-[639px]:items-center'>
+                                <ul className='shadow-md flex flex-col gap-2 p-2 items-center md:flex-row rounded-md ring-2 ring-indigo-600 w-auto justify-start sm:flex-row' key={cita.id}
                                 >
+                                    {
+                                        pacientes.map( paciente => {
+                                            let tpm = ''
+                                            const a = paciente.appointment.find(appointment => appointment.pacienteId === cita.pacienteId)
+                                            tpm = paciente.dni
+
+                                            if (a) {
+                                                return (
+                                                    <li key={paciente.id}>
+                                                        <p>{paciente.dni === tpm ? paciente.dni : ' '}</p>
+                                                    </li>
+                                                )
+                                            }
+                                        })
+                                    }
                                     <li  className='text-black text-center'>
-                                        <PacienteDatos pacientes={pacientes} />
-                                    </li>
-                                    <li  className='text-black text-center'>
-                                        <p>{cita.day}</p>
+                                        <p>{formateDate(cita.day)}</p>
                                     </li>
                                     <li className='text-black text-center'>
                                         <p>{`${cita.duration} mins`}</p>
                                     </li>
                                     <li className='text-black text-center'>
-                                        <p>{String(cita.time)}</p>
+                                        <p>{formateDate(String(cita.time))}</p>
                                     </li>
                                     <li className='text-black text-center'>
                                         <p>{cita.type}</p>
@@ -142,7 +150,7 @@ export const ApptListMedico = ({citas, pacientes}:Props) => {
                                         </button>
                                     </li>
                                 </ul>
-                            </>
+                            </div>
                         )
                     })
                 )

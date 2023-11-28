@@ -1,14 +1,6 @@
 import axios from 'axios'
-interface Cita {
-    id : number
-    day: string
-    duration: number
-    medicoId: number
-    pacienteId: number
-    time: Date
-    type: string
-    status: string
-}
+import type { Cita } from '@/types'
+
 export async function getPaciente(id: string){
     const res = await axios.get(`/api/paciente/${id}`)
     return res
@@ -84,10 +76,11 @@ export async function createAppointment(duration: number, dateConverter: string,
     return res
 }
 
-export async function  createMedico(name: string, dni: number,email: string,password: string,specialty: string,shiftStart:string,shiftEnd: string,numAppt:number,numFreeAppt:number){
+export async function  createMedico(username:string,name: string, dni: number,email: string,password: string,specialty: string,shiftStart:string,shiftEnd: string,numAppt:number,numFreeAppt:number){
 
     const res = await axios.post('/api/medico', {
         name: name,
+        username: username,
         dni: Number(dni),
         email: email,
         password: password,

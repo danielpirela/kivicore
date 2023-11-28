@@ -4,13 +4,13 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
     try {
-        const {email, password, role} = await req.json()
+        const {username, password, role} = await req.json()
 
-        if (!email || !password || role === '' || !role) {
+        if (!username || !password || role === '' || !role) {
             return NextResponse.json({error: 'correo o no contrasena enviado'}
             )}
-        const paciente = await prisma.paciente.findFirst({where: {email: email}})
-        const medico = await prisma.medico.findFirst({where: {email: email}})
+        const paciente = await prisma.paciente.findFirst({where: {username: username}})
+        const medico = await prisma.medico.findFirst({where: {username: username}})
 
         if (paciente && role === 'paciente') {
             const passwordHash = paciente.password

@@ -28,6 +28,7 @@ function EditarMedico () {
         const {elements} = e.currentTarget
 
         const name = elements.namedItem('nombre').value
+        const username = elements.namedItem('username').value
         const dni = elements.namedItem('dni').value
         const email = elements.namedItem('email').value
         const password = elements.namedItem('password').value
@@ -35,10 +36,10 @@ function EditarMedico () {
         const numAppt = elements.namedItem('numAppt').value
         const numFreeAppt = elements.namedItem('numFreeAppt').value
 
-        if (!name && !email && !password && !dni && !specialty && !numAppt && !numFreeAppt && !shiftStart && !shiftEnd){
+        if (! username || !name || !email || !password || !dni || !specialty || !numAppt || !numFreeAppt || !shiftStart || !shiftEnd){
             setIsError(true)
         }
-        console.log(name ,email ,password ,dni ,specialty ,numAppt ,numFreeAppt)
+        console.log(name ,email ,password ,dni ,specialty ,numAppt ,numFreeAppt,username)
 
 
         if (shiftStart && shiftEnd) {
@@ -47,8 +48,10 @@ function EditarMedico () {
             const newShiftEnd = await shiftEnd.toISOString()
 
             console.log(newShiftEnd,newShiftStart)
+
             const res = await axios.put(`/api/medico/${idMedico}`, {
                 name: name,
+                username: username,
                 dni: Number(dni),
                 email: email,
                 password: password,
@@ -63,15 +66,14 @@ function EditarMedico () {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full" >
+        <div className="flex flex-col justify-center items-center min-h-screen overflow-hidden bg-slate-100 min-w-full p-6" >
 
             <div className="w-auto h-full p-6 m-auto bg-white rounded-md shadow-xl ring-2 ring-indigo-600">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase decoration-wavy">
                     Editar
                 </h1>
                 <form className="mt-6 flex flex-col min-w-full justify-center items-center" onSubmit={handleSubmit}>
-
-                    <div className='flex flex-now  min-w-full'>
+                    <div className='flex flex-col md:flex-row  sm:flex-row  min-w-full'>
                         <div className='p-5'>
                             <div className="mb-2">
                                 <label
@@ -82,6 +84,19 @@ function EditarMedico () {
                                 </label>
                                 <input
                                     name='nombre'
+                                    type="text"
+                                    className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                                />
+                            </div>
+                            <div className="mb-2">
+                                <label
+                                    htmlFor="username"
+                                    className="block text-sm font-semibold text-gray-800"
+                                >
+                                    Usuario
+                                </label>
+                                <input
+                                    name='username'
                                     type="text"
                                     className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                 />
@@ -144,7 +159,7 @@ function EditarMedico () {
                             <div className="mb-2 text-black">
                                 <label
                                     htmlFor="shiftStart"
-                                    className="block text-sm font-semibold text-gray-800"
+                                    className="block text-sm font-semibold text-gray-800 py-2"
                                 >
                             Inicio Turno
                                 </label>
@@ -159,7 +174,7 @@ function EditarMedico () {
                             <div className="mb-2 text-black">
                                 <label
                                     htmlFor="shiftEnd"
-                                    className="block text-sm font-semibold text-gray-800"
+                                    className="block text-sm font-semibold text-gray-800 pb-4"
                                 >
                             Final Turno
                                 </label>

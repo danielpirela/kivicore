@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server'
 export async function POST (req: Request) {
     try {
         const {name,
+            username,
             dni,
             email,
             password,
@@ -15,9 +16,8 @@ export async function POST (req: Request) {
             numFreeAppt
         } = await req.json()
 
-        console.log(name,dni,email,password,specialty,shiftStart,shiftEnd,numAppt,numFreeAppt)
 
-        if(!name || !specialty || !shiftStart || !shiftEnd  || !numAppt || !numFreeAppt || !dni || !email || !password){
+        if(!name || !specialty || !shiftStart || !shiftEnd  || !numAppt || !numFreeAppt || !dni || !email || !password || !username){
             return NextResponse.json({error: 'no se enviaron datos'})
         }
 
@@ -26,6 +26,7 @@ export async function POST (req: Request) {
         const medico = await prisma.medico.create({
             data: {
                 name,
+                username,
                 dni,
                 email,
                 password:newPassword,

@@ -32,6 +32,7 @@ export async function PUT(req: Request, {params} : Params){
     try {
         const {
             name,
+            username,
             dni,
             email,
             password,
@@ -43,7 +44,7 @@ export async function PUT(req: Request, {params} : Params){
         } = await req.json()
 
 
-        if(!name || !specialty || !shiftStart || !shiftEnd  || !numAppt || !numFreeAppt || !dni || !email || !password){
+        if(!name || !specialty || !shiftStart || !shiftEnd  || !numAppt || !numFreeAppt || !dni || !email || !password || !username){
             return NextResponse.json({message: 'no se enviaron datos'})
         }
 
@@ -54,6 +55,7 @@ export async function PUT(req: Request, {params} : Params){
             },
             data:{
                 name,
+                username,
                 dni,
                 email,
                 password : newPassword,

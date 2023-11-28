@@ -25,15 +25,16 @@ export async function GET(){
 
 export async function POST(req: Request){
     try{
-        const {dni,phone,email,password,name,gender,status} = await req.json()
+        const {username,dni,phone,email,password,name,gender,status} = await req.json()
 
-        if(!dni || !phone || !email || !password || !name || !gender || !status){
+        if(!username ||!dni || !phone || !email || !password || !name || !gender || !status){
             return NextResponse.json({message: 'no se enviaron datos'})
         }
 
         const newPassword = await hashPassword(password)
         const pacienteCreado = await prisma.paciente.create({
             data:{
+                username,
                 dni,
                 phone,
                 email,

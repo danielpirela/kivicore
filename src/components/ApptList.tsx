@@ -4,21 +4,12 @@ import { deleteCita } from '@/utils/fetchData'
 import { ComponentModal } from './ComponentModal'
 import { CreateCita } from './CreateCita'
 import { IconCheck, IconClose, IconTrash } from './Icons'
-
+import { formateDate } from '@/utils/formatTime'
+import { Cita } from '@/types'
 interface Props {
     citas: Cita[]
 }
 
-interface Cita {
-    id : string
-    day: string
-    duration: number
-    medicoId: number
-    pacienteId: number
-    time: Date
-    type: string
-    status: string
-}
 
 const ApptList = ({citas}:Props) => {
 
@@ -55,7 +46,7 @@ const ApptList = ({citas}:Props) => {
             {
                 deleteView &&
                 <div className='fixed top-0 left-0 overflow-hidden bg-none opacity-95 min-h-screen min-w-full flex justify-center items-start'>
-                    <div className='bg-slate-100 rounded-lg p-3 ring-2 ring-red-600 mt-4'>
+                    <div className='bg-white rounded-lg p-3 ring-2 ring-red-600 mt-4 shadow-xl animate-fade-down delay-150'>
                         <h1 className=' text-lg'>Estas seguro que quieres borrarla?</h1>
                         <div className='space-x-1 justify-center items-center flex py-2'>
 
@@ -78,23 +69,22 @@ const ApptList = ({citas}:Props) => {
             {
                 citas && (
                     citas.map((cita , index)=> {
-                        console.log(cita)
                         return (
-                            <>
-                                <ul className='shadow-md flex space-x-2 p-2 rounded-md mt-2 ring-2 ring-indigo-600 w-auto justify-start items-center' key={cita.id}>
-                                    <li  className='text-black text-center'>
-                                        <p>{cita.day}</p>
+                            <div key={cita.id} className='gap-4 flex m-2 max-[639px]:justify-center max-[639px]:items-center animate-fade-left animate-delay-150'>
+                                <ul className='shadow-md flex flex-col gap-2 p-2 items-center md:flex-row rounded-md ring-2 ring-indigo-600 w-auto justify-start sm:flex-row'>
+                                    <li  className='text-black text-center w-auto'>
+                                        <p>{formateDate(cita.day)}</p>
                                     </li>
-                                    <li className='text-black text-center'>
+                                    <li className='text-black text-center w-auto'>
                                         <p>{`${cita.duration} mins`}</p>
                                     </li>
-                                    <li className='text-black text-center'>
-                                        <p>{String(cita.time)}</p>
+                                    <li className='text-black text-center w-auto'>
+                                        <p>{formateDate(String(cita.time))}</p>
                                     </li>
-                                    <li className='text-black text-center'>
+                                    <li className='text-black text-center w-auto'>
                                         <p>{cita.type}</p>
                                     </li>
-                                    <li className='text-black text-center'>
+                                    <li className='text-black text-center w-auto'>
                                         <button className={`rounded-xl px-2 text-white
                                     ${cita.status !== 'Programada' ? 'bg-green-500'
                                 : 'bg-orange-500'}`}
@@ -125,7 +115,7 @@ const ApptList = ({citas}:Props) => {
                                         </button>
                                     </li>
                                 </ul>
-                            </>
+                            </div>
                         )
                     })
                 )

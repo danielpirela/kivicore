@@ -3,7 +3,8 @@ import { useAppSelector } from '@/app/redux/hooks'
 import { MedicoList } from '@/components/MedicoList'
 import {NavMedico} from '@/components/NavMedico'
 import { getMedicoById, getPaciente } from '@/utils/fetchData'
-import { useEffect, useState } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
+import Loading from './loading'
 
 const page = () => {
     const idMedico = useAppSelector((state) => state.medicoId.id)
@@ -22,61 +23,27 @@ const page = () => {
     }
 
     useEffect(()=>{
-        const setState = async () => {
-            const res = await getMedicoById(idMedico)
-            if (res.data) {
-                setMedico(res.data)
-                const pacientesTmp = await resPaciente(res.data.appointment)
-                setPacientes(pacientesTmp)
-            }
-        }
-        setState()
+        findData()
     },[])
 
-
-    /* const [citas,setCitas] = useState([])
-    const [pacientes,setPacientes] = useState([])
-    const [medico,setMedico] = useState({})
-
-
-    const resMedico = async (id:string) =>{
-        const res = await getMedicoById(id)
-        if(res) {
-            return res.data
-        }
-    }
-
-    const resPaciente = async (appt : any) => {
-        const tpmPaciente : any = []
-        appt.map(async (cita:any) => {
-            const res = await getPaciente(cita.pacienteId)
-            if (res && !tpmPaciente.includes(res.data.id)){
-                tpmPaciente.push(res.data)
-            }
-        })
-        return tpmPaciente
-    }
-
-    useEffect(()=>{
-        const setStates = async () =>{
-            const appt = await resMedico(idMedico)
-            setMedico(appt)
-            setCitas(appt.appointment)
-            const pacien = await resPaciente(appt?.appointment)
-            setPacientes(pacien)
-
-            console.log(citas,pacientes)
+    const findData = useCallback(async ()=>{
+        const res = await getMedicoById(idMedico)
+        if (res.data) {
+            setMedico(res.data)
+            const pacientesTmp = await resPaciente(res.data.appointment)
+            setPacientes(pacientesTmp)
 
         }
-        setStates()
-    },[]) */
+    },[medico,pacientes])
 
     return (
         <>
             <NavMedico/>
-            <div className='bg-slate-100 min-h-screen min-w-full gap-2'>
-                <MedicoList medico={medico} pacientes={pacientes} />
-            </div>
+            <Suspense fallback={<Loading/>}>
+                <div className='bg-slate-100 min-h-screen min-w-full gap-2'>
+                    <MedicoList medico={medico} pacientes={pacientes} />
+                </div>
+            </Suspense>
         </>
     )
 }

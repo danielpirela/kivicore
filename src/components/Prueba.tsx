@@ -25,7 +25,7 @@ export const Prueba = ({historia}: Props) => {
             {
                 historia && (
                     <textarea name={'historyOld'} rows={6} cols={20} className='ring-2 ring-slate-700 rounded-lg
-                    hover:ring-indigo-500
+                    hover:ring-indigo-500 flex-1
                     ' value={historia.content}/>
                 )
             }

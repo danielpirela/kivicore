@@ -12,6 +12,7 @@ datasource db {
 
 model Paciente {
   id Int @id @default(autoincrement())
+  username String @unique
   dni Int @unique
   phone Int @unique
   email String @unique
@@ -36,6 +37,7 @@ model History {
 model Medico {
   id Int  @id @default(autoincrement())
   name String
+  username String @unique
   dni Int @unique
   email String @unique
   password String
@@ -58,4 +60,11 @@ model Appointment {
   medicoId Int
   paciente Paciente @relation(fields: [pacienteId], references: [id])
   medico Medico @relation(fields: [medicoId], references: [id])
+}
+
+
+model AdminUser {
+  id Int @id @default(autoincrement())
+  username String @default("admin")
+  password String
 }
