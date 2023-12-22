@@ -1,6 +1,5 @@
 'use client'
 import { Inter } from 'next/font/google'
-import { ProviderGate, Providers } from './redux/provider'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './globals.css'
@@ -18,13 +17,9 @@ export default function RootLayout({
                 <title>Kevi core</title>
             </head>
             <body className={inter.className}>
-                <Providers>
-                    <ProviderGate>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            {children}
-                        </LocalizationProvider>
-                    </ProviderGate>
-                </Providers>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {children}
+                </LocalizationProvider>
             </body>
         </html>
     )

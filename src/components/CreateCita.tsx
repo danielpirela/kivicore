@@ -2,18 +2,18 @@ import { createAppointment, getMedico } from '@/utils/fetchData'
 import { useEffect, useState } from 'react'
 import { SelectMedico } from './SelectMedico'
 import { DateTimePicker } from '@mui/x-date-pickers'
-import { useAppSelector } from '@/app/redux/hooks'
+import { useAuthStore } from '@/store/authStore'
 
 
 export const CreateCita = () => {
 
-    const email = useAppSelector(state => state.pacienteId.email)
+    const email = useAuthStore(state => state.email)
+    const pacienteId = useAuthStore(state => state.id)
 
     console.log(email)
 
-    const [date,setDate] = useState(null)
+    const [date,setDate] = useState<null | Date>(null)
     const [medicos, setMedicos] = useState([])
-    const pacienteId = useAppSelector(state => state.pacienteId.id)
 
     useEffect(() =>{
         const setState = async () => {

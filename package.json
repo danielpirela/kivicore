@@ -20,6 +20,8 @@
     "axios": "1.5.1",
     "bcrypt": "5.1.1",
     "dayjs": "^1.11.10",
+    "flowbite": "^2.2.0",
+    "flowbite-react": "^0.7.2",
     "moment": "2.29.4",
     "next": "13.5.6",
     "nodemailer": "^6.9.7",
@@ -29,7 +31,8 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
     "tailwindcss-animated": "^1.0.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/axios": "0.14.0",

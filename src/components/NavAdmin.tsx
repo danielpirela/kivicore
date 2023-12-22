@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import { BackArrow } from './BackArrow'
-import { setAuth } from '@/app/redux/features/authSlice'
-import { useAppDispatch } from '@/app/redux/hooks'
+import { useAuthStore } from '@/store/authStore'
+
 
 export const NavAdmin = () => {
-
-    const dispatch = useAppDispatch()
+    const setAuth = useAuthStore(state => state.setAuth)
 
     const handleClick = () =>{
-        dispatch(setAuth(false))
+        setAuth(false)
     }
 
     return (

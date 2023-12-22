@@ -37,15 +37,15 @@ export async function editAppointment(cita: any){
 }
 
 
-export async function editAppointmentForPacient(cita:Cita, dateTime : string ,duration: number){
-    const res = await axios.put(`/api/cita/${cita.id}`,{
+export async function editAppointmentForPacient(cita:Cita | null, dateTime : string ,duration: number){
+    const res = await axios.put(`/api/cita/${cita?.id}`,{
         day: dateTime,
         time: dateTime,
-        type: cita.type,
+        type: cita?.type,
         duration: Number(duration),
-        status: cita.status,
-        pacienteId: cita.pacienteId,
-        medicoId: cita.medicoId
+        status: cita?.status,
+        pacienteId: cita?.pacienteId,
+        medicoId: cita?.medicoId
     })
     return res
 }

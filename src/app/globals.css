@@ -14,3 +14,11 @@
       transform: rotate(359deg);
   }
 }
+
+* {
+  @apply transition-colors duration-200
+}
+
+#theme-button.active{
+  left: 29px;
+}

@@ -1,16 +1,20 @@
 'use client'
 import axios from 'axios'
-import { redirect } from 'next/navigation'
-import { useAppDispatch, useAppSelector} from '../redux/hooks'
-import { setAuth } from '../redux/features/authSlice'
-import { setPacienteId } from '../redux/features/pacienteSlice'
-import { useState } from 'react'
+
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { useState } from 'react'
+
+import { Input, Label } from '@/components/ui'
+import { useAuthStore } from '@/store/authStore'
 
 function Login () {
-    const auth = useAppSelector(state => state.auth.islogged)
+
+    const auth = useAuthStore(state => state.isLogged)
+    const setAuth = useAuthStore(state => state.setAuth)
+    const setPacienteId = useAuthStore(state => state.setPacienteId)
     const [isError, setError] = useState(false)
-    const dispatch = useAppDispatch()
+
 
     console.log(auth)
 
@@ -29,12 +33,12 @@ function Login () {
 
         if (res.data.err || res.data.error) {
             setError(true)
-            return dispatch(setAuth(false))
+            return setAuth(false)
         }
 
         setError(false)
-        dispatch(setAuth(true))
-        dispatch(setPacienteId(res.data.id))
+        setAuth(true)
+        setPacienteId(res.data.id)
     }
 
     if (auth) redirect('/paciente/admin')
@@ -47,29 +51,31 @@ function Login () {
                 </h1>
                 <form className="mt-6" onSubmit={handleSubmit}>
                     <div className="mb-2">
-                        <label
+                        <Label
                             htmlFor="email"
-                            className="block text-sm font-semibold text-gray-800"
                         >
                             Usuario
-                        </label>
-                        <input
+                        </Label>
+                        <Input
+                            id='username'
                             name='username'
                             type="text"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            autoComplete='current-password'
+                            required
+                            placeholder='pepito04'
                         />
                     </div>
                     <div className="mb-2">
-                        <label
+                        <Label
                             htmlFor="password"
-                            className="block text-sm font-semibold text-gray-800"
                         >
                             Password
-                        </label>
-                        <input
+                        </Label>
+                        <Input
+                            id='password'
                             name='password'
                             type="password"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            required
                         />
                         {
                             isError && (

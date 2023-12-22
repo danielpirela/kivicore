@@ -7,24 +7,36 @@ import { IconCheck, IconClose, IconTrash } from './Icons'
 import { formateDate } from '@/utils/formatTime'
 import { Cita } from '@/types'
 interface Props {
-    citas: Cita[]
+    citas: Cita[] | null
 }
 
 
 const ApptList = ({citas}:Props) => {
 
     const [isEditing, setIsEditing] = useState(false)
-    const [citaIndividual,setCitaIndividual] = useState({})
+
+    const [citaIndividual,setCitaIndividual] = useState<Cita>({
+        id : null,
+        day: null,
+        duration: null,
+        medicoId: null,
+        pacienteId: null,
+        time: null,
+        type: null,
+        status: null,
+        paciente : null,
+        medico: null
+    })
     const [deleteView, setDeleteView] = useState(false)
 
     const handleEdit = (e:React.MouseEvent<HTMLElement> , index: number) =>{
         e.preventDefault()
-        setCitaIndividual(citas[index])
+        if(citas) setCitaIndividual(citas[index])
         setIsEditing(!isEditing)
     }
     const handleDelete = (e:React.MouseEvent<HTMLElement> , index: number) =>{
         e.preventDefault()
-        setCitaIndividual(citas[index])
+        if(citas) setCitaIndividual(citas[index])
         setDeleteView(!deleteView)
     }
     return (
@@ -51,10 +63,12 @@ const ApptList = ({citas}:Props) => {
                         <div className='space-x-1 justify-center items-center flex py-2'>
 
                             <button onClick={async () =>{
-                                await deleteCita(citaIndividual.id)
-                                setDeleteView(!deleteView)
-                                alert('Cita eliminada')
-                                window.location.reload()
+                                if (citaIndividual) {
+                                    await deleteCita(citaIndividual?.id)
+                                    setDeleteView(!deleteView)
+                                    alert('Cita eliminada')
+                                    window.location.reload()
+                                }
                             }
                             }
                             className='px-4 py-2 bg-indigo-600 text-center rounded-lg w-32 text-white'

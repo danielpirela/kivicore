@@ -27,7 +27,7 @@ export default function Home() {
                 </picture>
 
                 <div className='absolute left-0 top-40 h-auto w-full p-6'>
-                    <p className='text-indigo-700 text-2xl opacity-100'>Cuidado profesional para su salud</p>
+                    <p className='text-indigo-700 text-2xl opacity-100 sm:text-xl '>Cuidado profesional para su salud</p>
 
                     <h1 className='text-3xl text-black font-bold  md:text-5xl z-10'>Atención de calidad a la vida
                         <br />

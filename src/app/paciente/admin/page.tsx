@@ -1,16 +1,31 @@
 'use client'
-import { setPacienteEmail } from '@/app/redux/features/pacienteSlice'
-import { useAppDispatch, useAppSelector } from '@/app/redux/hooks'
+
 import { NavPaciente } from '@/components/NavPaciente'
 import PacienteList from '@/components/PacienteList'
+import { useAuthStore } from '@/store/authStore'
+import type { Paciente } from '@/types'
 import { findPacienteById } from '@/utils/findPaciente'
 import { useEffect, useState } from 'react'
 
 
 const page = () => {
-    const idPaciente = useAppSelector(state => state.pacienteId.id)
-    const [paciente,setPaciente] = useState({})
-    const dispatch = useAppDispatch()
+    const idPaciente = useAuthStore(state => state.id)
+    const setPacienteEmail = useAuthStore(state => state.setPacienteEmail)
+
+    const [paciente,setPaciente] = useState<Paciente>({
+        username: null,
+        id : null,
+        dni: null,
+        email: null,
+        password:null,
+        gender: null,
+        phone: null,
+        name: null,
+        status: null,
+        appointment: null,
+        history : null
+    })
+
     useEffect(()=>{
         const setState = async () => {
             const res = await findPacienteById(idPaciente)
@@ -18,7 +33,7 @@ const page = () => {
                 console.log(res.data.email)
 
                 setPaciente(res.data)
-                dispatch(setPacienteEmail(res.data.email))
+                setPacienteEmail(res.data.email)
             }
         }
         setState()

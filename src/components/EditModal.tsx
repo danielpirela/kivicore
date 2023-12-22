@@ -3,13 +3,13 @@ import { DateTimePicker } from '@mui/x-date-pickers'
 import { useState } from 'react'
 import { Cita } from '@/types'
 interface Props {
-    cita: Cita
+    cita: Cita | null
 }
 
 
 
 export const EditModal =  ({cita}:Props) => {
-    const [date,setDate] = useState(null)
+    const [date,setDate] = useState<null | Date>(null)
 
     const handleSubmit = async(e:any) => {
         e.preventDefault()
@@ -45,7 +45,7 @@ export const EditModal =  ({cita}:Props) => {
 
 
 export const EditModal2 =  ({cita}:Props) => {
-    const [date,setDate] = useState(null)
+    const [date,setDate] = useState<null | Date>(null)
 
     const handleSubmit = async(e:any) => {
         e.preventDefault()

@@ -1,13 +1,12 @@
 'use client'
 import axios from 'axios'
 import { redirect } from 'next/navigation'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { setAuth } from '../../redux/features/authSlice'
+import { useAuthStore } from '@/store/authStore'
 import { useState } from 'react'
 
 function page () {
-    const auth = useAppSelector(state => state.auth.islogged)
-    const dispatch = useAppDispatch()
+    const auth = useAuthStore(state => state.isLogged)
+    const setAuth = useAuthStore(state => state.setAuth)
 
     const [isError, setError] = useState(false)
 
@@ -27,11 +26,10 @@ function page () {
 
         if (res.data.err || res.data.error) {
             setError(true)
-            return dispatch(setAuth(false))
+            return setAuth(false)
         }
         console.log(res)
-        dispatch(setAuth(true))
-
+        setAuth(true)
     }
 
     if (auth) redirect('/admin')

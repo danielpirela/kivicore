@@ -1,9 +1,8 @@
 import ApptList from './ApptList'
-import { Cita, Paciente } from '@/types'
+import { Paciente } from '@/types'
 
 interface Props {
     paciente: Paciente
-    citas: Cita[]
 }
 
 
