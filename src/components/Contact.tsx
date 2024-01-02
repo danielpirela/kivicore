@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { IconClose } from './Icons'
 
-export function About() {
+export function Contact() {
     const [Error, setError] = useState(false)
     const [isCreated, setIsCreated] = useState(false)
 
@@ -33,7 +33,7 @@ export function About() {
     }
 
     return (
-        <div className="relative">
+        <div className="relative" id='contact'>
             {isCreated && (
                 <div
                     id="toast-simple"

@@ -1,27 +1,36 @@
 'use client'
 
-import { About } from '@/components/About'
+import { Contact } from '@/components/Contact'
 import { CardMedicHome } from '@/components/CardMedicHome'
 import { IconMedicD, IconMedicH, IconMedicP, IconMedicT } from '@/components/Icons'
-import { LogoAnimated, Logo} from '@/components/Logo'
-import Link from 'next/link'
+import { Logo } from '@/components/Logo'
+import DarkMode from '@/components/ui/DarkMode'
+import { NavLink } from '@/components/ui/links/NavLink'
 
 export default function Home() {
     return (
-        <>
-            <header className='min-w-full h-16 flex justify-between items-center p-2 bg-slate-100 shadow-lg border-b-indigo-800 border-2'>
+        <div className='min-w-full min-h-screen dark:bg-slate-100 bg-slate-900'>
+            <header className='fixed z-50 dark:bg-white/80 bg-slate-900/80 min-w-full h-16 flex justify-between items-center p-2 shadow-xl backdrop-blur-lg'>
                 <Logo/>
-                <div className='flex gap-2'>
-                    <Link href={'/login'} className='w-full px-4 py-2 tracking-wide text-black transition-colors duration-200 transform bg-white shadow-xl ring-2 ring-indigo-600  rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 ' >
-                Paciente
-                    </Link>
-                    <Link href={'/loginmedico'} className='w-full px-4 py-2 tracking-wide text-black transition-colors duration-200 transform bg-white md shadow-xl ring-2 ring-indigo-600 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600 text-sm'>
-                Medico
-                    </Link>
-                </div>
+                <nav className='flex gap-2 justify-center items-center'>
+                    <DarkMode/>
+                    <NavLink href={'#contact'}>
+                        Contactanos
+                    </NavLink>
+                    <NavLink href={'/login'} >
+                        Paciente
+                    </NavLink>
+                    <NavLink href={'/loginmedico'} >
+                        Medico
+                    </NavLink>
+                </nav>
+
+                <nav>
+                    
+                </nav>
             </header>
 
-            <div className='min-w-full h-3/4 pt-20 bg-slate-100 relative'>
+            <div className='min-w-full h-3/4 pt-36 dark:bg-slate-100 bg-slate-900 relative '>
                 <picture className='w-full h-full shadow-xl'>
                     <img src='/images/Rectangle.webp' alt='medic image' className='object-cover aspect-auto w-full h-full'/>
                 </picture>
@@ -35,7 +44,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <main className='bg-slate-100 min-h-screen min-w-full flex justify-center items-start py-20 flex-col' >
+            <main className='dark:bg-slate-100 bg-slate-900 min-h-screen min-w-full flex justify-center items-start py-20 flex-col' >
                 <section className='flex flex-col gap-2 p-2 items-center md:flex-row'>
                     <picture className='flex flex-1 w-full sm:w-2/3'>
                         <img src='/images/hospital.webp' alt='medic image' className='object-cover aspect-square w-full h-full'/>
@@ -77,12 +86,12 @@ export default function Home() {
                 </section>
             </main>
 
-            <footer className='min-w-full bg-indigo-700 flex-col justify-center items-center p-2'>
-                <About/>
+            <footer className='min-w-full flex-col justify-center items-center p-2'>
+                <Contact/>
                 <div className='min-w-full justify-center items-center flex py-2'>
-                    <Link href={'admin/login'} className='font-medium text-center text-white'>admin</Link>
+                    <NavLink href={'admin/login'} >Admin</NavLink>
                 </div>
             </footer>
-        </>
+        </div>
     )
 }

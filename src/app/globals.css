@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.animated {
-  animation: rotation 2s infinite linear;
+
+html {
+  font-family: 'Onest Variable';
+  scroll-behavior: smooth;
 }
 
 @keyframes rotation {

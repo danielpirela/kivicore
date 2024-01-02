@@ -19,7 +19,6 @@ const config: Config = {
     darkMode: 'class',
     plugins: [
         require('tailwindcss-animated'),
-        require('flowbite/plugin')
     ],
 }
 export default config
