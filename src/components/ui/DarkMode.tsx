@@ -1,44 +1,42 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-export default function DarkMode() {
-    const $ = (query : string) => document.querySelector(query)
-
-    const button = $('#theme-button')
-    const html = document.getElementsByTagName('html')[0]
+export function DarkMode() {
     const [theme, setTheme] = useState('light')
+    const [isActive, setIsActive] = useState(false)
 
-    useEffect(()=> {
+    useEffect(() => {
+        const html = document.getElementsByTagName('html')[0]
         if (theme === 'dark') {
             html?.classList.add('dark')
-            // $('theme-button')?.classList.add('active')
+            //$('theme-button')?.classList.add('active')
         } else {
             html?.classList.remove('dark')
-            // $('theme-button')?.classList.remove('active')
+            //$('theme-button')?.classList.remove('active')
         }
-    },[theme])
+        console.log(isActive)
+    }, [theme, isActive])
 
     const handleChange = () => {
-        button?.classList.toggle('active')
-        setTheme(prevTheme =>  prevTheme === 'light' ? 'dark' : 'light')
+        //button?.classList.toggle('active')
+        setIsActive(!isActive)
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
     }
 
     return (
-        <div className='dark:bg-slate-900 bg-slate-100  min-w-full min-h-screen flex justify-center items-center my-0 mx-auto'>
-            <div className='dark:bg-slate-100 bg-slate-900 relative w-14 h-7
-            shadow-inner cursor-pointer rounded-full'
-            onClick={handleChange}
+        <div className='flex justify-center items-center my-0 mx-auto'>
+            <div
+                className='bg-slate-900 dark:bg-slate-50 relative w-14 h-7
+                shadow-inner cursor-pointer rounded-full flex items-center'
+                onClick={handleChange}
             >
                 <div
                     id='theme-button'
-                    className='dark:bg-slate-900 bg-slate-100 absolute left-0 top-0 w-7 h-7 transform-[scale(.7)] shadow-lg transition-all duration-200 rounded-full
-                    '
-                >
-                </div>
+                    className={`dark:bg-slate-900 bg-slate-50 absolute w-6 h-6 transform-[scale(.7)] shadow-lg transition-all duration-200 rounded-full
+                    ${isActive ? 'left-[29px]' : 'left-[2px]'}
+                    `}
+                ></div>
             </div>
         </div>
     )
 }
-
-
-

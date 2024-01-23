@@ -11,7 +11,6 @@ export const IconCheck = ({ w, h }: Props) => {
     )
 }
 
-
 export const IconTrash = ({ w, h }: Props) => {
     return (
         <Image src={'/images/basura.png'} alt={'icon trash'} width={w} height={h}/>
