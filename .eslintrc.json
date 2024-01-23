@@ -7,6 +7,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:prettier/recommended",
         "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [
@@ -17,12 +18,14 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "@typescript-eslint/no-explicit-any": "off",
         "react/react-in-jsx-scope" : "off",
         "no-var" :"off",
+        "prettier/prettier" :"error",
 
         "indent": [
             "error",
