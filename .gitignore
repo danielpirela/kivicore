@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# db and env
+
+.env
+/migrations
+dev.db
+
 # testing
 /coverage
 
