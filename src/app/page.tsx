@@ -1,6 +1,6 @@
 'use client'
 
-import { About } from '@/components/About'
+import { Contact } from '@/components/Contact'
 import { CardMedicHome } from '@/components/CardMedicHome'
 import {
     IconMedicD,
@@ -13,9 +13,9 @@ import Link from 'next/link'
 
 export default function Home() {
     return (
-        <div className='relative flex flex-col'>
+        <div className='bg-white relative flex flex-col bg:white dark:bg-gray-950'>
             <Header />
-            <div className='min-w-full h-3/4 pt-20 bg-slate-100 relative'>
+            <div className='min-w-full h-3/4 pt-20 bg-white dark:bg-gray-800 relative'>
                 <picture className='w-full h-full shadow-xl'>
                     <img
                         src='/images/Rectangle.webp'
@@ -36,7 +36,7 @@ export default function Home() {
                     </h1>
                 </div>
             </div>
-            <main className='bg-slate-100 min-h-screen min-w-full flex justify-center items-start py-20 flex-col'>
+            <main className='min-h-screen min-w-full flex justify-center items-start py-20 flex-col bg:white bg-gray-800'>
                 <section className='flex flex-col gap-2 p-2 items-center md:flex-row'>
                     <picture className='flex flex-1 w-full sm:w-2/3'>
                         <img
@@ -45,7 +45,7 @@ export default function Home() {
                             className='object-cover aspect-square w-full h-full'
                         />
                     </picture>
-                    <div className='flex p-4 gap-4 flex-1 flex-col'>
+                    <div className='flex p-4 gap-4 flex-1 flex-col' id='about'>
                         <p className='font-bold text-xl text-indigo-700'>
                             Saber mas
                         </p>
@@ -103,8 +103,8 @@ export default function Home() {
                     </CardMedicHome>
                 </section>
             </main>
-            <footer className='min-w-full bg-indigo-700 flex-col justify-center items-center p-2'>
-                <About />
+            <footer className='min-w-full flex-col justify-center items-center p-2'>
+                <Contact />
                 <div className='min-w-full justify-center items-center flex py-2'>
                     <Link
                         href={'admin/login'}

@@ -20,11 +20,11 @@ export function DarkMode() {
     const handleChange = () => {
         //button?.classList.toggle('active')
         setIsActive(!isActive)
-        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
     }
 
     return (
-        <div className='flex justify-center items-center my-0 mx-auto'>
+        <div className='flex justify-center items-center my-0 mx-4'>
             <div
                 className='bg-slate-900 dark:bg-slate-50 relative w-14 h-7
                 shadow-inner cursor-pointer rounded-full flex items-center'

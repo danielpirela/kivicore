@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-const {EMAIL, PASSWORD} = process.env
+const { EMAIL, PASSWORD } = process.env
 
 export const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -8,10 +8,9 @@ export const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         user: EMAIL,
-        pass: PASSWORD
-    }
+        pass: PASSWORD,
+    },
 })
-
 
 transporter.verify().then(() => {
     console.log('a')

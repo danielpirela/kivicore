@@ -2,23 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 .animated {
-  animation: rotation 2s infinite linear;
+    animation: rotation 2s infinite linear;
 }
 
 @keyframes rotation {
-  from {
-      transform: rotate(0deg);
-  }
-  to {
-      transform: rotate(359deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
 }
 
 * {
-  @apply transition-colors duration-200
+    @apply transition-colors duration-200;
 }
 
-#theme-button.active{
-  left: 29px;
+#theme-button.active {
+    left: 29px;
 }

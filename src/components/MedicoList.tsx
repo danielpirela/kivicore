@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface Cita {
-    id : string
+    id: string
     day: string
     duration: number
     medicoId: number
@@ -18,30 +18,32 @@ interface Cita {
 }
 
 interface Paciente {
-id : string
-dni: string
-phone: string
-name: string,
-status: string
-appointment: Cita[]
+    id: string
+    dni: string
+    phone: string
+    name: string
+    status: string
+    appointment: Cita[]
 }
 
-export const MedicoList = ({medico,pacientes}:Props) => {
-
+export const MedicoList = ({ medico, pacientes }: Props) => {
     return (
         <div className='text-black'>
-            <h1 className='font-semibold text-2xl ml-2 text-indigo-600'>Medico</h1>
-            {
-                medico && (
-                    <div>
-                        <section className='flex flex-col ml-2'>
-                            <p className='text-lg'>{`Dni: ${medico.dni}`}</p>
-                            <p className='text-lg'>{`Nombre: ${medico.name}`}</p>
-                        </section>
-                        <ApptListMedico citas={medico.appointment} pacientes={pacientes} />
-                    </div>
-                )
-            }
+            <h1 className='font-semibold text-2xl ml-2 text-indigo-600'>
+                Medico
+            </h1>
+            {medico && (
+                <div>
+                    <section className='flex flex-col ml-2'>
+                        <p className='text-lg'>{`Dni: ${medico.dni}`}</p>
+                        <p className='text-lg'>{`Nombre: ${medico.name}`}</p>
+                    </section>
+                    <ApptListMedico
+                        citas={medico.appointment}
+                        pacientes={pacientes}
+                    />
+                </div>
+            )}
         </div>
     )
 }
