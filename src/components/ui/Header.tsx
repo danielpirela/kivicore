@@ -8,7 +8,7 @@ export function Header() {
     const HiddenHandler = () => setIsHidden(!isHidden)
 
     return (
-        <nav className='bg-white border-gray-200 dark:bg-gray-900 flex min-w-full justify-between'>
+        <nav className='bg-white border-gray-200 dark:bg-gray-900 flex min-w-full justify-between shadow-lg'>
             <div className='flex flex-wrap items-center justify-between mx-0 p-4 flex-2 w-full'>
                 <Link href={'/'} className='flex-1 w-auto'>
                     <Logo />
@@ -55,7 +55,7 @@ export function Header() {
                         </li>
                         <li>
                             <Link
-                                href='#about'
+                                href='/#about'
                                 className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:scale-110 transition-all duration-200'
                             >
                                 About
@@ -63,15 +63,15 @@ export function Header() {
                         </li>
                         <li>
                             <Link
-                                href='#contact'
-                                className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:scale-110 transition-all duration-200'
+                                href='/#contact'
+                                className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:scale-110 transition-all duration-200 '
                             >
                                 Contact
                             </Link>
                         </li>
                         <li>
                             <Link
-                                href='/login'
+                                href='/prelogin'
                                 className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:scale-110 transition-all duration-200'
                             >
                                 Login
@@ -79,7 +79,7 @@ export function Header() {
                         </li>
                         <li className='px-3 py-2 flex items-center justify-center rounded-md hover:scale-110 transition-all duration-200 md:bg-blue-700 md:text-white bg-transparent dark:text-white text-gray-900'>
                             <Link
-                                href='/register'
+                                href='/preregister'
                                 className='block rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent'
                             >
                                 Sign up

@@ -1,0 +1,35 @@
+@import url(https://unpkg.com/css-peeps@1/css-peeps.compat.css);
+
+.paciente {
+    --peep-hat-color: #fc03c2;
+    --peep-hair-color: #7300e6;
+    --peep-skin-color: #ffffff;
+    --peep-accessory-color: #ffffff;
+    --peep-facial-hair-color: #ffd700;
+    --peep-object-color: #ffa500;
+    --peep-clothes-color: #000000;
+
+    display: inline-block;
+    width: 325px;
+    height: 276px;
+    background: white;
+    border-radius: 10px;
+    border: 2px solid var(--peep-accessory-color);
+}
+
+.medico {
+    --peep-hat-color: #000000;
+    --peep-hair-color: #000000;
+    --peep-skin-color: #ffffff;
+    --peep-accessory-color: #fafafa;
+    --peep-facial-hair-color: #ffd700;
+    --peep-object-color: #ffffff;
+    --peep-clothes-color: #ffffff;
+
+    display: inline-block;
+    width: 325px;
+    height: 276px;
+    background: white;
+    border-radius: 10px;
+    border: 2px solid var(--peep-accessory-color);
+}

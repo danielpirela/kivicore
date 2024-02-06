@@ -36,7 +36,7 @@ export default function Home() {
                     </h1>
                 </div>
             </div>
-            <main className='min-h-screen min-w-full flex justify-center items-start py-20 flex-col bg:white bg-gray-800'>
+            <main className='min-h-screen min-w-full flex justify-center items-start py-20 flex-col bg:white dakr:bg-gray-800 bg-white'>
                 <section className='flex flex-col gap-2 p-2 items-center md:flex-row'>
                     <picture className='flex flex-1 w-full sm:w-2/3'>
                         <img
@@ -108,7 +108,7 @@ export default function Home() {
                 <div className='min-w-full justify-center items-center flex py-2'>
                     <Link
                         href={'admin/login'}
-                        className='font-medium text-center text-white'
+                        className='font-medium text-center dark:text-white text-black'
                     >
                         admin
                     </Link>
