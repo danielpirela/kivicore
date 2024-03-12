@@ -1,83 +1,100 @@
 import axios from 'axios'
 import type { Cita } from '@/types'
 
-export async function getPaciente(id: string){
+export async function getPaciente(id: string) {
     const res = await axios.get(`/api/paciente/${id}`)
     return res
 }
 
-export async function getMedicoById(id: string){
+export async function getMedicoById(id: string) {
     const medico = await axios.get(`/api/medico/${id}`)
     return medico
 }
 
-export async function editHistory(paciente: any, content: string){
+export async function editHistory(paciente: any, content: string) {
     const id = paciente.history[0].id
     const contentNew = paciente.history[0].content + content
     console.log(id, contentNew)
 
-    const res = await axios.put(`/api/historia/${id}`,{
-        content: contentNew
+    const res = await axios.put(`/api/historia/${id}`, {
+        content: contentNew,
     })
     return res
 }
 
-export async function editAppointment(cita: any){
+export async function editAppointment(cita: any) {
     const id = cita.id
-    const res = await axios.put(`/api/cita/${id}`,{
+    const res = await axios.put(`/api/cita/${id}`, {
         day: cita.day,
         time: cita.time,
         type: cita.type,
         duration: cita.duration,
         status: 'Completada',
         pacienteId: cita.pacienteId,
-        medicoId: cita.medicoId
+        medicoId: cita.medicoId,
     })
     return res
 }
 
-
-export async function editAppointmentForPacient(cita:Cita | null, dateTime : string ,duration: number){
-    const res = await axios.put(`/api/cita/${cita?.id}`,{
+export async function editAppointmentForPacient(
+    cita: Cita | null,
+    dateTime: string,
+    duration: number,
+) {
+    const res = await axios.put(`/api/cita/${cita?.id}`, {
         day: dateTime,
         time: dateTime,
         type: cita?.type,
         duration: Number(duration),
         status: cita?.status,
         pacienteId: cita?.pacienteId,
-        medicoId: cita?.medicoId
+        medicoId: cita?.medicoId,
     })
     return res
 }
 
-export async function deleteCita(id: number){
+export async function deleteCita(id: number) {
     const res = await axios.delete(`/api/cita/${id}`)
     return res
 }
 
-
-export async function getMedico(){
+export async function getMedico() {
     const res = await axios.get('/api/medico')
     return res
 }
 
-
-export async function createAppointment(duration: number, dateConverter: string, medico : string, pacienteId: string,email: string){
-    const res = await axios.post('/api/cita/',{
+export async function createAppointment(
+    duration: number,
+    dateConverter: string,
+    medico: string,
+    pacienteId: string,
+    email: string,
+) {
+    const res = await axios.post('/api/cita/', {
         day: dateConverter,
         time: dateConverter,
         type: 'paga',
         duration: Number(duration),
         status: 'Programada',
-        pacienteId:Number(pacienteId),
+        pacienteId: Number(pacienteId),
         medicoId: Number(medico),
-        email: email
+        email: email,
     })
     return res
 }
 
-export async function  createMedico(username:string,name: string, dni: number,email: string,password: string,specialty: string,shiftStart:string,shiftEnd: string,numAppt:number,numFreeAppt:number){
-
+export async function createMedico(
+    username: string,
+    name: string,
+    dni: number,
+    email: string,
+    password: string,
+    specialty: string,
+    shiftStart: string,
+    shiftEnd: string,
+    numAppt: number,
+    numFreeAppt: number,
+) {
     const res = await axios.post('/api/medico', {
         name: name,
         username: username,
@@ -88,7 +105,7 @@ export async function  createMedico(username:string,name: string, dni: number,em
         shiftStart: shiftStart,
         shiftEnd: shiftEnd,
         numAppt: Number(numAppt),
-        numFreeAppt: Number(numFreeAppt)
+        numFreeAppt: Number(numFreeAppt),
     })
     return res
 }

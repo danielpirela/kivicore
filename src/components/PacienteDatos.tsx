@@ -7,7 +7,7 @@ interface Props {
 }
 
 interface Cita {
-    id : string
+    id: string
     day: string
     duration: number
     medicoId: number
@@ -18,46 +18,48 @@ interface Cita {
 }
 
 interface Paciente {
-id : string
-dni: string
-phone: string
-name: string,
-status: string
-appointment: Cita[]
+    id: string
+    dni: string
+    phone: string
+    name: string
+    status: string
+    appointment: Cita[]
 }
 
-export function PacienteDatos({pacientes, cita}:Props) {
-
-
-
-
-    useEffect(() =>{
+export function PacienteDatos({ pacientes, cita }: Props) {
+    useEffect(() => {
         const a = () => {
-            pacientes?.map((paciente : Paciente) => {
-                console.log(paciente.id,cita.id)
+            pacientes?.map((paciente: Paciente) => {
+                console.log(paciente.id, cita.id)
                 if (paciente.id === cita.id) {
-                    console.log(paciente.id,cita.id, 'a')
+                    console.log(paciente.id, cita.id, 'a')
                 }
             })
         }
         a()
-    },[pacientes, cita])
+    }, [pacientes, cita])
 
     return (
         <>
-            {
-                pacientes && (
-                    pacientes.map(paciente =>{
-                        return (
-                            <li className='flex flex-col items-center md:flex-row w-auto justify-start sm:flex-row' key={paciente.id}>
-                                <p className='text-black text-center'>{paciente.dni}</p>
-                                <p className='text-black text-center'>{paciente.name}</p>
-                                <p className='text-black text-center'>{paciente.status}</p>
-                            </li>
-                        )
-                    })
-                )
-            }
+            {pacientes &&
+                pacientes.map(paciente => {
+                    return (
+                        <li
+                            className='flex flex-col items-center md:flex-row w-auto justify-start sm:flex-row'
+                            key={paciente.id}
+                        >
+                            <p className='text-black text-center'>
+                                {paciente.dni}
+                            </p>
+                            <p className='text-black text-center'>
+                                {paciente.name}
+                            </p>
+                            <p className='text-black text-center'>
+                                {paciente.status}
+                            </p>
+                        </li>
+                    )
+                })}
         </>
     )
 }

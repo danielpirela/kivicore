@@ -8,8 +8,6 @@ export const CreateCita = () => {
     const email = useAuthStore(state => state.email)
     const pacienteId = useAuthStore(state => state.pacienteId)
 
-    console.log(email)
-
     const [date, setDate] = useState<null | Date>(null)
     const [medicos, setMedicos] = useState([])
 

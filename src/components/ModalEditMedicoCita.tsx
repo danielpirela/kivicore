@@ -1,5 +1,4 @@
-export const ModalEditMedicoCita = ({children}) => {
-
+export const ModalEditMedicoCita = ({ children }) => {
     return (
         <>
             <div className='fixed top-0 left-0 min-h-full min-w-full flex justify-center items-center'>
@@ -7,7 +6,6 @@ export const ModalEditMedicoCita = ({children}) => {
                     {children}
                 </div>
             </div>
-
         </>
     )
 }
