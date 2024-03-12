@@ -16,7 +16,7 @@ export const PacientToggle = ({ pacientes }: Props) => {
     console.log(pacientes)
 
     const [isActive, setIsActive] = useState(false)
-    const [isView, setIsView] = useState(false)
+    // const [isView, setIsView] = useState(false)
     const handleActive = (e: any) => {
         e.preventDefault()
         setIsActive(!isActive)

@@ -1,6 +1,4 @@
-import { redirect } from 'next/navigation'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { editAppointment, editHistory } from '@/utils/fetchData'
 
 interface Props {
@@ -103,11 +101,7 @@ export const CitasToggle = ({ citas, pacientes }: Props) => {
                             <li className='text-black text-center'>
                                 <button
                                     className={`rounded-xl px-2 text-white
-                                    ${
-                        cita.status !== 'Programada'
-                            ? 'bg-green-500'
-                            : 'bg-orange-500'
-                        }`}
+                                    ${cita.status !== 'Programada' ? 'bg-green-500' : 'bg-orange-500'}`}
                                 >
                                     {cita.status}
                                 </button>

@@ -143,11 +143,7 @@ export const ApptListMedico = ({ citas, pacientes }: Props) => {
                                 <li className='text-black text-center'>
                                     <button
                                         className={`rounded-xl px-2 text-white
-                                    ${
-                        cita.status !== 'Programada'
-                            ? 'bg-green-500'
-                            : 'bg-orange-500'
-                        }`}
+                                    ${cita.status !== 'Programada' ? 'bg-green-500' : 'bg-orange-500'}`}
                                     >
                                         {cita.status}
                                     </button>

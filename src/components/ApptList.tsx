@@ -111,11 +111,7 @@ const ApptList = ({ citas }: Props) => {
                                 <li className='text-black text-center w-auto'>
                                     <button
                                         className={`rounded-xl px-2 text-white
-                                    ${
-                                        cita.status !== 'Programada'
-                                            ? 'bg-green-500'
-                                            : 'bg-orange-500'
-                                    }`}
+                                    ${cita.status !== 'Programada' ? 'bg-green-500' : 'bg-orange-500'}`}
                                     >
                                         {cita.status}
                                     </button>

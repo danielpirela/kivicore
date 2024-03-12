@@ -2,7 +2,7 @@ interface Props {
     historia: History
 }
 
-interface Paciente {
+export interface Paciente {
     id: string
     dni: string
     phone: string
