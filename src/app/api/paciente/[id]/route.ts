@@ -1,51 +1,70 @@
 import { hashPassword } from '@/utils/hashPassword'
-import {prisma} from '@/utils/prisma'
-import { error } from 'console'
+import { prisma } from '@/utils/prisma'
 import { NextResponse } from 'next/server'
 
 interface Params {
-    params: {id: string}
+    params: { id: string }
 }
 
-export async function GET(req: Request, {params}: Params) {
-    try{
+export async function GET(req: Request, { params }: Params) {
+    try {
         const paciente = await prisma.paciente.findFirst({
-            where: {id: Number(params.id)},
+            where: { id: Number(params.id) },
             include: {
                 history: true,
-                appointment: true
-            }
+                appointment: true,
+            },
         })
 
-        if(!paciente) return NextResponse.json({message: 'no se encontro paciente'})
+        if (!paciente)
+            return NextResponse.json({ message: 'no se encontro paciente' })
         return NextResponse.json(paciente)
-
-    }catch(err){
-        if(err instanceof Error){
+    } catch (err) {
+        if (err instanceof Error) {
             return NextResponse.json({
                 message: err.message,
-                status: 500
+                status: 500,
             })
         }
     }
 }
 
-export async function PUT (req: Request, {params} : Params) {
+export async function PUT(req: Request, { params }: Params) {
     try {
-        const {username,dni,phone,email,password,name,gender,status,history} = await req.json()
+        const {
+            username,
+            dni,
+            phone,
+            email,
+            password,
+            name,
+            gender,
+            status,
+            history,
+        } = await req.json()
         console.log(params.id, username, dni, phone, email, password)
 
         const newPassword = await hashPassword(password)
 
-        if(!username ||!dni && !phone && !email && !password && !name && !gender && !status && !history){
-            return NextResponse.json({message: 'no se enviaron datos'})
+        if (
+            !username ||
+            (!dni &&
+                !phone &&
+                !email &&
+                !password &&
+                !name &&
+                !gender &&
+                !status &&
+                !history)
+        ) {
+            return NextResponse.json({ message: 'no se enviaron datos' })
         }
 
         const pacientePut = await prisma.paciente.update({
             where: {
-                id: Number(params.id)
+                id: Number(params.id),
             },
-            data:{
+            data: {
                 username,
                 dni,
                 phone,
@@ -54,21 +73,22 @@ export async function PUT (req: Request, {params} : Params) {
                 name,
                 gender,
                 status,
-                history
-            }
+                history,
+            },
         })
 
-        if (!pacientePut) return NextResponse.json({error: 'No se puedo actualizar el paciente'})
+        if (!pacientePut)
+            return NextResponse.json({
+                error: 'No se puedo actualizar el paciente',
+            })
 
         return NextResponse.json(pacientePut)
-
     } catch (err) {
-        if(err instanceof Error) {
-            return NextResponse.json(
-                {
-                    message: err.message, status: 500
-                }
-            )
+        if (err instanceof Error) {
+            return NextResponse.json({
+                message: err.message,
+                status: 500,
+            })
         }
     }
 }

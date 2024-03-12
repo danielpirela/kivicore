@@ -1,21 +1,24 @@
 import { transporter } from '@/utils/email'
 import { prisma } from '@/utils/prisma'
 import { NextResponse } from 'next/server'
-const {EMAIL} = process.env
+const { EMAIL } = process.env
 
-export async function POST (req: Request){
+export async function POST(req: Request) {
     try {
-        const {username,role} = await req.json()
+        const { username, role } = await req.json()
 
         console.log(username, role)
 
-
         if (!username || role === '' || !role) {
-            return NextResponse.json({error: 'usuario no enviado'}
-            )}
+            return NextResponse.json({ error: 'usuario no enviado' })
+        }
 
-        const paciente = await prisma.paciente.findFirst({where: {username: username}})
-        const medico = await prisma.medico.findFirst({where: {username: username}})
+        const paciente = await prisma.paciente.findFirst({
+            where: { username: username },
+        })
+        const medico = await prisma.medico.findFirst({
+            where: { username: username },
+        })
 
         if (paciente && role === 'paciente') {
             const info = await transporter.sendMail({
@@ -85,16 +88,15 @@ export async function POST (req: Request){
                   </div>
                 </body>
                 </html>
-                `
+                `,
             })
 
             console.log(info)
 
-            return NextResponse.json({message: 'ok'})
+            return NextResponse.json({ message: 'ok' })
         }
 
         if (medico && role === 'medico') {
-
             const info = await transporter.sendMail({
                 from: EMAIL,
                 to: medico.email,
@@ -162,19 +164,18 @@ export async function POST (req: Request){
                   </div>
                 </body>
                 </html>
-                `
+                `,
             })
 
             console.log(info)
 
-            return NextResponse.json({message: 'ok'})
+            return NextResponse.json({ message: 'ok' })
         }
 
-        return NextResponse.json({error: 'no se existe el correo'})
-    }
-    catch(err){
-        if(err instanceof Error){
-            return NextResponse.json({error: err.message, status: 500})
+        return NextResponse.json({ error: 'no se existe el correo' })
+    } catch (err) {
+        if (err instanceof Error) {
+            return NextResponse.json({ error: err.message, status: 500 })
         }
     }
 }
