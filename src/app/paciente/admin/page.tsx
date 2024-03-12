@@ -7,28 +7,28 @@ import type { Paciente } from '@/types'
 import { findPacienteById } from '@/utils/findPaciente'
 import { useEffect, useState } from 'react'
 
-
 const page = () => {
-    const idPaciente = useAuthStore(state => state.id)
+    const idPaciente = useAuthStore(state => state.pacienteId)
     const setPacienteEmail = useAuthStore(state => state.setPacienteEmail)
 
-    const [paciente,setPaciente] = useState<Paciente>({
+    const [paciente, setPaciente] = useState<Paciente>({
         username: null,
-        id : null,
+        id: null,
         dni: null,
         email: null,
-        password:null,
+        password: null,
         gender: null,
         phone: null,
         name: null,
         status: null,
         appointment: null,
-        history : null
+        history: null,
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         const setState = async () => {
             const res = await findPacienteById(idPaciente)
+
             if (res.data) {
                 console.log(res.data.email)
 
@@ -37,11 +37,13 @@ const page = () => {
             }
         }
         setState()
-    },[])
+    }, [])
+
+    console.log(paciente)
 
     return (
         <>
-            <NavPaciente/>
+            <NavPaciente />
             <div className='bg-slate-100 min-h-screen min-w-full gap-2'>
                 <PacienteList paciente={paciente} />
             </div>
@@ -50,4 +52,3 @@ const page = () => {
 }
 
 export default page
-
