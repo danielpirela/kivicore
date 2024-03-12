@@ -2,6 +2,8 @@ import nodemailer from 'nodemailer'
 
 const { EMAIL, PASSWORD } = process.env
 
+console.log(EMAIL, PASSWORD)
+
 export const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -13,5 +15,5 @@ export const transporter = nodemailer.createTransport({
 })
 
 transporter.verify().then(() => {
-    console.log('a')
+    console.log('CICLA')
 })

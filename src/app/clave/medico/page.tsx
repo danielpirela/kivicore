@@ -13,17 +13,15 @@ export default function page() {
 
         const username = elements.namedItem('username').value
 
-        const res = await axios.post('/api/recuperar', {
-            username: username,
-            role: 'medico',
-        })
-
-        console.log(res)
-
-        if (res.data.err || res.data.error) {
-            setError(true)
+        if (username) {
+            const res = await axios.post('/api/recuperar', {
+                username: username,
+                role: 'medico',
+            })
+            if (res.data.err || res.data.error) {
+                setError(true)
+            }
         }
-        console.log(res)
     }
 
     return (

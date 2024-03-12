@@ -7,8 +7,6 @@ export async function POST(req: Request) {
     try {
         const { username, role } = await req.json()
 
-        console.log(username, role)
-
         if (!username || role === '' || !role) {
             return NextResponse.json({ error: 'usuario no enviado' })
         }
@@ -16,6 +14,7 @@ export async function POST(req: Request) {
         const paciente = await prisma.paciente.findFirst({
             where: { username: username },
         })
+
         const medico = await prisma.medico.findFirst({
             where: { username: username },
         })
